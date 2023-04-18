@@ -1,66 +1,65 @@
----
 bootstrap:
-    features:
-        with-special-groups: false
-        with-raw-capability: true
-        aggregated-level-name: all
-        group-prefix: cdf
-        dataset-suffix: ds
-        rawdb-suffix: db
-        rawdb-additional-variants:
-            - state
-    idp-cdf-mappings:
-        - cdf-project: cdf-bootcamp-55-test
-          mappings:
-              - cdf-group: cdf:root
-                idp-source-id: 3a9acafc-3d86-419c-8a33-936411a03d1b
-                idp-source-name: bootcamp-55-test-admin
-              - cdf-group: cdf:all:owner
-                idp-source-id: f0fdb0a6-7dfb-4091-a2f2-4dfdaad1ed7d
-                idp-source-name: bootcamp-55-test-all-owner
-              - cdf-group: cdf:all:read
-                idp-source-id: 5c3531c0-8bd6-4dfd-8b4d-e3b0345a0a7a
-                idp-source-name: bootcamp-55-test-all-read
-        - cdf-project: cdf-bootcamp-55-prod
-          mappings:
-              - cdf-group: cdf:root
-                idp-source-id: e891eedd-229b-4021-8fa3-36a35d07f79b
-                idp-source-name: bootcamp-55-prod-admin
-              - cdf-group: cdf:all:owner
-                idp-source-id: 5444f43a-19ab-4599-8061-81a500c1b536
-                idp-source-name: bootcamp-55-prod-all-owner
-              - cdf-group: cdf:all:read
-                idp-source-id: dd92479c-f87b-472f-a20b-c2a29091be7e
-                idp-source-name: bootcamp-55-prod-all-read
-    namespaces:
-        - ns-name: src
-          description: Sources used for data extraction
-          ns-nodes:
+  features:
+    with-special-groups: false
+    with-raw-capability: true
+    aggregated-level-name: all
+    group-prefix: cdf
+    dataset-suffix: ds
+    rawdb-suffix: db
+    rawdb-additional-variants:
+      - state
+  idp-cdf-mappings:
+    - cdf-project: cdf-bootcamp-55-test
+      mappings:
+        - cdf-group: cdf:root
+          idp-source-id: 3a9acafc-3d86-419c-8a33-936411a03d1b
+          idp-source-name: bootcamp-55-test-admin
+        - cdf-group: cdf:all:owner
+          idp-source-id: f0fdb0a6-7dfb-4091-a2f2-4dfdaad1ed7d
+          idp-source-name: bootcamp-55-test-all-owner
+        - cdf-group: cdf:all:read
+          idp-source-id: 5c3531c0-8bd6-4dfd-8b4d-e3b0345a0a7a
+          idp-source-name: bootcamp-55-test-all-read
+    - cdf-project: cdf-bootcamp-55-prod
+      mappings:
+        - cdf-group: cdf:root
+          idp-source-id: e891eedd-229b-4021-8fa3-36a35d07f79b
+          idp-source-name: bootcamp-55-prod-admin
+        - cdf-group: cdf:all:owner
+          idp-source-id: 5444f43a-19ab-4599-8061-81a500c1b536
+          idp-source-name: bootcamp-55-prod-all-owner
+        - cdf-group: cdf:all:read
+          idp-source-id: dd92479c-f87b-472f-a20b-c2a29091be7e
+          idp-source-name: bootcamp-55-prod-all-read
+  namespaces:
+    - ns-name: src
+      description: Sources used for data extraction
+      ns-nodes:
+        - node-name: src:001:sap
+          description: Source 01 data from SAP
+        - node-name: src:002:opcua
+          description: Source 02 data from opcua
+    - ns-name: uc
+      description: Use cases representing the data/products
+      ns-nodes:
+        - node-name: uc:001:oee
+          description: Use case 001 Over all Equipment effectiveness
+          shared-access:
+            read:
               - node-name: src:001:sap
-                description: Source 01 data from SAP
               - node-name: src:002:opcua
-                description: Source 02 data from opcua
-        - ns-name: uc
-          description: Use cases representing the data/products
-          ns-nodes:
-              - node-name: uc:001:oee
-                description: Use case 001 Over all Equipment effectiveness
-                shared-access:
-                    read:
-                        - node-name: src:001:sap
-                        - node-name: src:002:opcua
 cognite:
-    host: ${BOOTSTRAP_CDF_HOST}
-    project: ${BOOTSTRAP_CDF_PROJECT}
-    idp-authentication:
-        client-id: ${BOOTSTRAP_IDP_CLIENT_ID}
-        secret: ${BOOTSTRAP_IDP_CLIENT_SECRET}
-        scopes:
-            - ${BOOTSTRAP_IDP_SCOPES}
-        token_url: ${BOOTSTRAP_IDP_TOKEN_URL}
+  host: ${BOOTSTRAP_CDF_HOST}
+  project: ${BOOTSTRAP_CDF_PROJECT}
+  idp-authentication:
+    client-id: ${BOOTSTRAP_IDP_CLIENT_ID}
+    secret: ${BOOTSTRAP_IDP_CLIENT_SECRET}
+    scopes:
+      - ${BOOTSTRAP_IDP_SCOPES}
+    token_url: ${BOOTSTRAP_IDP_TOKEN_URL}
 logger:
-    file:
-        path: ./logs/bootstrap-cli-logs.log
-        level: INFO
-    console:
-        level: INFO
+  file:
+    path: ./logs/bootstrap-cli-logs.log
+    level: INFO
+  console:
+    level: INFO
